@@ -1,0 +1,8 @@
+Django>=3.2
+djangorestframework
+djangorestframework-simplejwt
+pymongo
+dnspython
+bson
+requests
+google-generativeai

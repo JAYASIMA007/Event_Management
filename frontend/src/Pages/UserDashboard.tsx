@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react"
 import { useNavigate } from "react-router-dom"
-import { Search, MapPin, Calendar, Clock,  ChevronDown, Linkedin, Instagram, Facebook } from "lucide-react"
+import { MapPin, Calendar, Clock,  ChevronDown, Linkedin, Instagram, Facebook } from "lucide-react"
 import axios from "axios"
 import audience from "../images/Group 139.svg"
 
@@ -151,9 +151,9 @@ const UserDashboard = () => {
                 <ChevronDown className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5 pointer-events-none" />
               </div>
             </div>
-            <button className="bg-purple-500 hover:bg-purple-600 text-white px-8 py-3 rounded-lg transition-colors duration-200 flex items-center">
+            {/* <button className="bg-purple-500 hover:bg-purple-600 text-white px-8 py-3 rounded-lg transition-colors duration-200 flex items-center">
               <Search className="w-5 h-5" />
-            </button>
+            </button> */}
           </div>
         </div>
       </section>
