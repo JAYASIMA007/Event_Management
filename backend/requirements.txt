@@ -6,3 +6,5 @@ dnspython
 bson
 requests
 google-generativeai
+corsheaders
+pillow
