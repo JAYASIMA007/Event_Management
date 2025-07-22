@@ -1,5 +1,5 @@
 import { useState } from "react"
-import { useNavigate, Link } from "react-router-dom"
+import { useNavigate, } from "react-router-dom"
 import axios from "axios"
 import eventBackground from "../images/event_background.svg"
 import { FaEye, FaEyeSlash } from 'react-icons/fa'
