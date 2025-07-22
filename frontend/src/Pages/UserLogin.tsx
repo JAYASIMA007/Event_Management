@@ -16,7 +16,7 @@ const Login = () => {
     setIsLoading(true);
 
     try {
-      const response = await axios.post("http://localhost:8000/api/user/login/", {
+      const response = await axios.post("https://event-management-mmle.onrender.com/api/user/login/", {
         email,
         password,
       });

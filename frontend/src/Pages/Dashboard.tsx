@@ -37,7 +37,7 @@ const AdminDashboard: React.FC = () => {
           return
         }
 
-        const res = await fetch("http://localhost:8000/api/get-events/", {
+        const res = await fetch("https://event-management-mmle.onrender.com/api/get-events/", {
           headers: {
             Authorization: `Bearer ${token}`,
             "Content-Type": "application/json",

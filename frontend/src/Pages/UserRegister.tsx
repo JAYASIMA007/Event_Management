@@ -25,7 +25,7 @@ const UserRegister = () => {
     setIsLoading(true)
 
     try {
-      const response = await axios.post("http://localhost:8000/api/user/register/", {
+      const response = await axios.post("https://event-management-mmle.onrender.com/api/user/register/", {
         name: name,
         email: email,
         password: password,
