@@ -1,0 +1,29 @@
+name: Restrict PR Merge to Master
+on: 
+  pull_request_target:
+    types:
+      - opened
+      - synchronize
+      - reopened
+    branches:    
+      - 'master'
+      - 'deploy'
+
+jobs:
+  job1:
+    name: check_admins
+    runs-on: ubuntu-latest
+    env:
+      ADMINS: JAYASIMA007
+    steps:
+      - name: Check if actor is an admin
+        run: |
+          IFS=',' read -ra ADMIN_LIST <<< "$ADMINS"
+          for admin in "${ADMIN_LIST[@]}"; do
+            if [[ "$GITHUB_ACTOR" == "$admin" ]]; then
+              echo "User is authorized."
+              exit 0
+            fi
+          done
+          echo "Unauthorized user: $GITHUB_ACTOR"
+          exit 1
