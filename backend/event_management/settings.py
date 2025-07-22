@@ -135,6 +135,15 @@ REST_FRAMEWORK = {
     )
 }
 
+ALLOWED_HOSTS = [
+"*",
+]
+
+CORS_ALLOWED_ORIGINS = [
+    "https://event-management-mmle.onrender.com",
+]
+CORS_ALLOW_CREDENTIALS = True
+
 from datetime import timedelta
 
 SIMPLE_JWT = {
