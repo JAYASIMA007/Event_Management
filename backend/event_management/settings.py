@@ -136,10 +136,13 @@ REST_FRAMEWORK = {
 }
 
 ALLOWED_HOSTS = [
-    'localhost',
-    '127.0.0.1',
-    'event-management-mmle.onrender.com',
+"*",
 ]
+
+CORS_ALLOWED_ORIGINS = [
+    "https://event-management-mmle.onrender.com",
+]
+CORS_ALLOW_CREDENTIALS = True
 
 from datetime import timedelta
 
