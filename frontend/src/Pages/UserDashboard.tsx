@@ -1,8 +1,6 @@
-"use client"
-
 import { useState, useEffect } from "react"
 import { useNavigate } from "react-router-dom"
-import { Search, MapPin, Calendar, Clock, Filter, ChevronDown, Linkedin, Instagram, Facebook } from "lucide-react"
+import { Search, MapPin, Calendar, Clock,  ChevronDown, Linkedin, Instagram, Facebook } from "lucide-react"
 import axios from "axios"
 import audience from "../images/Group 139.svg"
 
@@ -168,27 +166,9 @@ const UserDashboard = () => {
           </h3>
           <div className="flex items-center space-x-4">
             <div className="flex items-center space-x-2">
-              <Filter className="w-4 h-4 text-gray-500" />
-              <select className="border border-gray-300 rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-purple-500 focus:border-transparent">
-                <option>Category</option>
-                <option>Music</option>
-                <option>Sports</option>
-                <option>Education</option>
-              </select>
             </div>
-            <select className="border border-gray-300 rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-purple-500 focus:border-transparent">
-              <option>Sort by</option>
-              <option>Date</option>
-              <option>Price</option>
-              <option>Popularity</option>
-            </select>
-            <select className="border border-gray-300 rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-purple-500 focus:border-transparent">
-              <option>All regions</option>
-              <option>North</option>
-              <option>South</option>
-              <option>East</option>
-              <option>West</option>
-            </select>
+
+
           </div>
         </div>
 
