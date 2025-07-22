@@ -135,6 +135,12 @@ REST_FRAMEWORK = {
     )
 }
 
+ALLOWED_HOSTS = [
+    'localhost',
+    '127.0.0.1',
+    'event-management-mmle.onrender.com',
+]
+
 from datetime import timedelta
 
 SIMPLE_JWT = {
