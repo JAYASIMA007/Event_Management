@@ -429,7 +429,6 @@ def create_event(request):
 
             # Handle multipart/form-data
             title = request.POST.get('title')
-            email = request.POST.get('email')
             venue = request.POST.get('venue')
             start_time = request.POST.get('start_time', '').strip()
             end_time = request.POST.get('end_time', '').strip()
@@ -445,7 +444,7 @@ def create_event(request):
             print(f"Raw end_date: '{end_date}', end_time: '{end_time}'")
 
             # Validate required fields
-            if not all([title, email, venue, start_time, end_time, start_date, end_date, cost, image]):
+            if not all([title, venue, start_time, end_time, start_date, end_date, cost, image]):
                 return JsonResponse({'error': 'All fields are required'}, status=400)
 
             if len(title) > 50:
@@ -489,7 +488,6 @@ def create_event(request):
 
             event_data = {
                 'title': title,
-                'email': email,
                 'venue': venue,
                 'start_time': start_time,
                 'end_time': end_time,
@@ -520,6 +518,7 @@ def create_event(request):
     return JsonResponse({'error': 'Invalid request method'}, status=405)
 
 @csrf_exempt
+@csrf_exempt
 def events_list(request):
     """Fetches and lists events for admin or users."""
     try:
@@ -532,20 +531,31 @@ def events_list(request):
         # Validate token (use AccessToken, not RefreshToken)
         try:
             user_email = AccessToken(token).get('email') if token else None
+            user_role = AccessToken(token).get('role')
         except Exception as e:
             return JsonResponse({'error': 'Invalid or expired token'}, status=401)
 
         if not user_email:
             return JsonResponse({'error': 'Invalid or expired token'}, status=401)
 
-        user = admin_collection.find_one({'email': user_email})
-        is_admin = user and user.get('role') == 'admin' if user else False
-
-        # Fetch events based on role
-        if is_admin:
-            events = list(event_collection.find({'status': 'Active'}))
+        # Check if user exists in either collection based on role
+        if user_role == 'admin':
+            user = admin_collection.find_one({'email': user_email})
         else:
-            events = list(event_collection.find({'email': user_email, 'status': 'Active'}))
+            user = user_collection.find_one({'email': user_email})
+
+        if not user:
+            return JsonResponse({'error': 'User not found'}, status=404)
+
+        is_admin = user.get('role') == 'admin'
+
+        # Fetch all active events regardless of user role
+        events = list(event_collection.find({'status': 'Active'}))
+
+        # Debug information
+        print(f"Found {len(events)} active events")
+        print(f"User role: {user_role}")
+        print(f"Is admin: {is_admin}")
 
         # Format events for response
         events_list = [{
@@ -562,8 +572,13 @@ def events_list(request):
             'end_time': event['end_time'],
         } for event in events]
 
-        return JsonResponse({'events': events_list}, status=200)
+        return JsonResponse({
+            'events': events_list,
+            'total_events': len(events_list),
+            'user_role': user_role
+        }, status=200)
 
     except Exception as e:
         print(f"Unexpected error: {str(e)}")
         return JsonResponse({'error': f'An unexpected error occurred: {str(e)}'}, status=500)
+ 

@@ -4,7 +4,6 @@ import axios from 'axios';
 
 const CreateEvent = () => {
   const [title, setTitle] = useState('');
-  const [email, setEmail] = useState('');
   const [venue, setVenue] = useState('');
   const [startTime, setStartTime] = useState('');
   const [endTime, setEndTime] = useState('');
@@ -20,7 +19,6 @@ const CreateEvent = () => {
     e.preventDefault();
     const formData = new FormData();
     formData.append('title', title);
-    formData.append('email', email);
     formData.append('venue', venue);
     formData.append('start_time', startTime);
     formData.append('end_time', endTime);
@@ -62,16 +60,6 @@ const CreateEvent = () => {
             type="text"
             value={title}
             onChange={(e) => setTitle(e.target.value)}
-            className="mt-1 block w-full p-2 border border-gray-300 rounded-md"
-            required
-          />
-        </div>
-        <div>
-          <label className="block text-sm font-medium text-gray-700">Email</label>
-          <input
-            type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
             className="mt-1 block w-full p-2 border border-gray-300 rounded-md"
             required
           />
