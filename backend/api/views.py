@@ -8,7 +8,7 @@ from django.core.validators import validate_email
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 import requests
-from rest_framework_simplejwt.tokens import RefreshToken
+from rest_framework_simplejwt.tokens import RefreshToken, AccessToken
 from pymongo import MongoClient
 from bson import ObjectId
 import os
@@ -415,7 +415,11 @@ def create_event(request):
                 return JsonResponse({'error': 'Authorization token required. Header received: ' + auth_header}, status=401)
 
             # Validate token (simplified, actual validation should decode and check)
-            admin_email = RefreshToken(token).get('email') if token else None
+            try:
+                admin_email = AccessToken(token).get('email') if token else None
+            except Exception as e:
+                return JsonResponse({'error': 'Invalid or expired token'}, status=401)
+
             if not admin_email:
                 return JsonResponse({'error': 'Invalid or expired token'}, status=401)
 
@@ -515,7 +519,6 @@ def create_event(request):
 
     return JsonResponse({'error': 'Invalid request method'}, status=405)
 
-
 @csrf_exempt
 def events_list(request):
     """Fetches and lists events for admin or users."""
@@ -526,8 +529,12 @@ def events_list(request):
         if not token:
             return JsonResponse({'error': 'Authorization token required. Header received: ' + auth_header}, status=401)
 
-        # Validate token (simplified)
-        user_email = RefreshToken(token).get('email') if token else None
+        # Validate token (use AccessToken, not RefreshToken)
+        try:
+            user_email = AccessToken(token).get('email') if token else None
+        except Exception as e:
+            return JsonResponse({'error': 'Invalid or expired token'}, status=401)
+
         if not user_email:
             return JsonResponse({'error': 'Invalid or expired token'}, status=401)
 
