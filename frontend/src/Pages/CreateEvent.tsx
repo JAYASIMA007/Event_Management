@@ -68,7 +68,7 @@ const CreateEvent = () => {
     formData.append("generate_description", generateDescription.toString())
 
     try {
-      await axios.post("http://localhost:8000/api/create-event/", formData, {
+      await axios.post("https://event-management-mmle.onrender.com/api/create-event/", formData, {
         headers: {
           Authorization: `Bearer ${token}`,
           "Content-Type": "multipart/form-data",

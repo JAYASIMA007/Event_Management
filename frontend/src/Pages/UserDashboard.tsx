@@ -34,7 +34,7 @@ const UserDashboard = () => {
           navigate("/user-login")
           return
         }
-        const response = await axios.get("http://localhost:8000/api/get-events/", {
+        const response = await axios.get("https://event-management-mmle.onrender.com/api/get-events/", {
           headers: {
             Authorization: `Bearer ${token}`,
           },
