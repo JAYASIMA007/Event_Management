@@ -478,7 +478,7 @@ def create_event(request):
                 response = model.generate_content(prompt)
                 if response and hasattr(response, 'text'):
                     ai_description = response.text.strip()
-                    description = f"{ai_description} [AI-Generated]"
+                    description = f"{ai_description}"
                 else:
                     return JsonResponse({'error': 'Failed to generate description from AI service'}, status=500)
             elif not description:
