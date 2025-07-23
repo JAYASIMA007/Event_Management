@@ -19,7 +19,7 @@ const AdminRegister = () => {
     setIsLoading(true)
     try {
       // Use confirm_password as backend expects
-      await axios.post("http://localhost:8000/api/admin/register/", {
+      await axios.post("https://event-management-mmle.onrender.com/api/admin/register/", {
         name,
         email,
         password,

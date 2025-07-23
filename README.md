@@ -94,8 +94,8 @@ This project is an **Event Management System** that allows users and admins to m
 ### Frontend
 - `VITE_API_URL`: Backend API URL for API requests.
 
-## Screenshots
-Add screenshots of your application here to demonstrate its functionality.
+## Deployment
+The deployment link of the project is https://event-management-jayasima.vercel.app/
 
 ## License
 This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
