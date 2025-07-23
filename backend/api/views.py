@@ -470,7 +470,6 @@ def create_event(request):
 
             # Integrate Gemini API for description generation
             if generate_description and all([title, venue, start_date, end_date, cost]):
-                import google.generativeai as genai
                 genai.configure(api_key="AIzaSyCmR5my83iF_ASIQVbc0_tTJ23OVxDyIwo")
                 model = genai.GenerativeModel("gemini-2.0-flash")
                 prompt = f"Generate a description for an event titled '{title}' at '{venue}' from {start_date} to {end_date} costing {cost} INR."
