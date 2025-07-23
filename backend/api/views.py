@@ -23,6 +23,8 @@ admin_collection = db['admins']
 user_collection = db['users']
 event_collection = db['events']
 
+genai.configure(api_key="AIzaSyCmR5my83iF_ASIQVbc0_tTJ23OVxDyIwo")
+model = genai.GenerativeModel("gemini-2.0-flash")
 # Validators
 def validate_name(name):
     if not name.replace(" ", "").isalpha():
@@ -470,8 +472,6 @@ def create_event(request):
 
             # Integrate Gemini API for description generation
             if generate_description and all([title, venue, start_date, end_date, cost]):
-                genai.configure(api_key="AIzaSyCmR5my83iF_ASIQVbc0_tTJ23OVxDyIwo")
-                model = genai.GenerativeModel("gemini-2.0-flash")
                 prompt = f"Generate a description for an event titled '{title}' at '{venue}' from {start_date} to {end_date} costing {cost} INR."
                 response = model.generate_content(prompt)
                 if response and hasattr(response, 'text'):
